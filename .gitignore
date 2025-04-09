@@ -14,6 +14,7 @@ target/
 # Gradle
 .gradle/
 build/
+!gradle/wrapper/gradle-wrapper.jar
 
 # IntelliJ IDEA
 .idea/
@@ -48,20 +49,15 @@ logs/
 
 # JAR files and dependencies
 lib/
-*.jar
 
 # Spring Boot specific
 *.log
 *.war
-*.jar
 
 # Files for project configurations and builds
 *.log
 *.bak
 *.swp
-
-# Gradle wrapper
-gradle-wrapper.jar
 
 # Other
 *.orig
