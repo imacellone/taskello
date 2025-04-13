@@ -5,7 +5,10 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Optional;
 
-public class DateTimeUtils {
+public final class DateTimeUtils {
+
+    private DateTimeUtils() {
+    }
 
     public static OffsetDateTime truncateToMinutesOrNull(final OffsetDateTime offsetDateTime) {
         return truncateOrNull(offsetDateTime, ChronoUnit.MINUTES);
