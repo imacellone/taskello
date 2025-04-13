@@ -1,4 +1,4 @@
-package com.taskello.api.model.input;
+package com.taskello.api.v1.model.input;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

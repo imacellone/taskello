@@ -1,4 +1,4 @@
-package com.taskello.api.model.output;
+package com.taskello.api.v1.model.output;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
