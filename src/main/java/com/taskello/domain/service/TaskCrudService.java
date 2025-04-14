@@ -4,6 +4,7 @@ import com.taskello.domain.entity.Task;
 import com.taskello.domain.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,5 +16,10 @@ class TaskCrudService {
 
     List<Task> findAll() {
         return taskRepository.findAll();
+    }
+
+    @Transactional
+    public Task save(final Task newTask) {
+        return taskRepository.save(newTask);
     }
 }

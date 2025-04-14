@@ -2,13 +2,14 @@ package com.taskello.api.v1.resource;
 
 import com.taskello.api.ApiPaths;
 import com.taskello.api.v1.mapper.TaskMapper;
+import com.taskello.api.v1.model.input.TaskInput;
 import com.taskello.api.v1.model.output.TaskOutput;
 import com.taskello.domain.entity.Task;
 import com.taskello.domain.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +26,14 @@ public class TaskController {
         List<Task> allTasks = taskService.findAll();
         return taskMapper.toOutput(allTasks);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TaskOutput create(@RequestBody @Valid final TaskInput taskInput) {
+        Task newTask = taskMapper.toEntity(taskInput);
+        Task persistedTask = taskService.save(newTask);
+        return taskMapper.toOutput(persistedTask);
+    }
+
 
 }
