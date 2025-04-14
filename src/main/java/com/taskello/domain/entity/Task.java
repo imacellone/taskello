@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import java.time.OffsetDateTime;
 
-import static com.taskello.util.DateTimeUtils.nowTruncatedToMinute;
-import static com.taskello.util.DateTimeUtils.truncateToMinutesOrNull;
+import static com.taskello.util.DateTimeUtils.nowUtcTruncatedToMinute;
+import static com.taskello.util.DateTimeUtils.truncateToMinutesOrNullAndConvertToUtc;
 
 @Entity
 @Getter
@@ -38,18 +38,18 @@ public class Task {
     private OffsetDateTime updatedAt;
 
     public void setDeadline(final OffsetDateTime deadline) {
-        this.deadline = truncateToMinutesOrNull(deadline);
+        this.deadline = truncateToMinutesOrNullAndConvertToUtc(deadline);
     }
 
     @PrePersist
     private void onCreate() {
-        this.createdAt = nowTruncatedToMinute();
+        this.createdAt = nowUtcTruncatedToMinute();
         this.updatedAt = createdAt;
     }
 
     @PreUpdate
     private void onUpdate() {
-        this.updatedAt = nowTruncatedToMinute();
+        this.updatedAt = nowUtcTruncatedToMinute();
     }
 
 }
