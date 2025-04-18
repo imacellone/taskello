@@ -1,4 +1,4 @@
-package com.taskello.domain.entity;
+package com.taskello.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,14 +8,15 @@ import lombok.Setter;
 
 import java.time.OffsetDateTime;
 
-import static com.taskello.util.DateTimeUtils.nowUtcTruncatedToMinute;
-import static com.taskello.util.DateTimeUtils.truncateToMinutesOrNullAndConvertToUtc;
+import static com.taskello.common.util.DateTimeUtils.nowUtcTruncatedToMinute;
+import static com.taskello.common.util.DateTimeUtils.truncateToMinutesOrNullAndConvertToUtc;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "task")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Task {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +32,7 @@ public class Task {
 
     private OffsetDateTime deadline;
 
-    @Setter(AccessLevel.NONE)
+    // todo: try to encapsulate this again
     private OffsetDateTime createdAt;
 
     @Setter(AccessLevel.NONE)

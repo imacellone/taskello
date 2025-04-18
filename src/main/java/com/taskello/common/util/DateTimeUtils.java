@@ -1,4 +1,4 @@
-package com.taskello.util;
+package com.taskello.common.util;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

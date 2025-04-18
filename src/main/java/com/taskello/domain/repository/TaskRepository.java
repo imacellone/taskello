@@ -1,9 +1,11 @@
 package com.taskello.domain.repository;
 
-import com.taskello.domain.entity.Task;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.taskello.domain.model.Task;
 
-@Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {
+import java.util.List;
+
+public interface TaskRepository {
+    List<Task> findAll();
+    Task save(final Task task);
+    Task findById(final Long taskId);
 }
