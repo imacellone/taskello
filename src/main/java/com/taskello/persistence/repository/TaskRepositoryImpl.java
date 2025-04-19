@@ -24,17 +24,33 @@ class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
+    public Task findById(final Long taskId) {
+        final TaskEntity taskEntity = findEntityByIdOrThrow(taskId);
+        return taskEntityMapper.toInternal(taskEntity);
+    }
+
+    @Override
     public Task save(final Task task) {
+        return task.getId() == null ? create(task) : update(task);
+    }
+
+    private Task create(final Task task) {
         final TaskEntity taskEntity = taskEntityMapper.toExternal(task);
         final TaskEntity persistedTaskEntity = repositoryDelegate.save(taskEntity);
         return taskEntityMapper.toInternal(persistedTaskEntity);
     }
 
-    @Override
-    public Task findById(final Long taskId) {
-        return repositoryDelegate
-                .findById(taskId)
-                .map(taskEntityMapper::toInternal)
-                .orElseThrow(() -> new TaskNotFoundException(taskId));
+    private Task update(final Task task) {
+        final TaskEntity taskEntity = findEntityByIdOrThrow(task.getId());
+        taskEntity.updateFrom(task);
+        return taskEntityMapper.toInternal(taskEntity);
+    }
+
+    private TaskEntity findEntityByIdOrThrow(final Long taskId) {
+        final var taskNotFoundException = new TaskNotFoundException(taskId);
+        if (taskId == null) {
+            throw taskNotFoundException;
+        }
+        return repositoryDelegate.findById(taskId).orElseThrow(() -> taskNotFoundException);
     }
 }
