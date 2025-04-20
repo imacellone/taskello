@@ -1,10 +1,11 @@
 package com.taskello.persistence.repository;
 
+import com.taskello.common.mapper.BiMapper;
 import com.taskello.domain.exception.TaskNotFoundException;
 import com.taskello.domain.model.Task;
 import com.taskello.domain.repository.TaskRepository;
 import com.taskello.persistence.entity.TaskEntity;
-import com.taskello.common.mapper.BiMapper;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -24,14 +25,20 @@ class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task findById(final Long taskId) {
+    public Task findById(@NonNull final Long taskId) {
         final TaskEntity taskEntity = findEntityByIdOrThrow(taskId);
         return taskEntityMapper.toInternal(taskEntity);
     }
 
     @Override
-    public Task save(final Task task) {
+    public Task save(@NonNull final Task task) {
         return task.getId() == null ? create(task) : update(task);
+    }
+
+    @Override
+    public void deleteById(@NonNull final Long taskId) {
+        requireTaskExists(taskId);
+        repositoryDelegate.deleteById(taskId);
     }
 
     private Task create(final Task task) {
@@ -46,11 +53,13 @@ class TaskRepositoryImpl implements TaskRepository {
         return taskEntityMapper.toInternal(taskEntity);
     }
 
-    private TaskEntity findEntityByIdOrThrow(final Long taskId) {
-        final var taskNotFoundException = new TaskNotFoundException(taskId);
-        if (taskId == null) {
-            throw taskNotFoundException;
+    private TaskEntity findEntityByIdOrThrow(@NonNull final Long taskId) {
+        return repositoryDelegate.findById(taskId).orElseThrow(() -> new TaskNotFoundException(taskId));
+    }
+
+    private void requireTaskExists(final Long taskId) {
+        if (!repositoryDelegate.existsById(taskId)) {
+            throw new TaskNotFoundException(taskId);
         }
-        return repositoryDelegate.findById(taskId).orElseThrow(() -> taskNotFoundException);
     }
 }

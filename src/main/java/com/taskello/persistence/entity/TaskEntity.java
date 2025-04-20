@@ -5,6 +5,7 @@ import com.taskello.domain.model.Task;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
@@ -35,7 +36,7 @@ public class TaskEntity {
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 
-    public void setTitle(final String title) {
+    public void setTitle(@NonNull final String title) {
         final String newTitle = normalizeStringOrNull(title);
         if (newTitle == null) {
             throw new InvalidTaskException("Task provided for update has invalid title");
@@ -51,7 +52,7 @@ public class TaskEntity {
         this.deadline = truncateToMinutesOrNullAndConvertToUtc(deadline);
     }
 
-    public void updateFrom(final Task task) {
+    public void updateFrom(@NonNull final Task task) {
         requireSameIdentityAs(task);
         setTitle(task.getTitle());
         setDeadline(task.getDeadline());
@@ -60,11 +61,7 @@ public class TaskEntity {
     }
 
     private void requireSameIdentityAs(final Task task) {
-        final Long otherId = Optional.ofNullable(task)
-                .map(Task::getId)
-                .orElseThrow(() -> new InvalidTaskException("Update Task - null or missing ID"));
-
-        if (!otherId.equals(this.id)) {
+        if (!this.getId().equals(task.getId())) {
             throw new InvalidTaskException("Update Task - ID mismatch");
         }
     }

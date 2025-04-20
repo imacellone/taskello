@@ -1,6 +1,5 @@
 package com.taskello.domain.model;
 
-import com.taskello.domain.exception.InvalidTaskToggleException;
 import com.taskello.domain.model.command.TaskTogglesCommand;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,9 +21,9 @@ public class Task {
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 
-    public void apply (final TaskTogglesCommand taskTogglesCommand) {
+    public void apply(final TaskTogglesCommand taskTogglesCommand) {
         this.done = Optional.ofNullable(taskTogglesCommand)
                 .map(TaskTogglesCommand::getDone)
-                .orElseThrow(() -> new InvalidTaskToggleException("No toggles present"));
+                .orElseThrow(() -> new IllegalArgumentException("No toggles present"));
     }
 }
