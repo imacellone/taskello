@@ -1,10 +1,10 @@
-## ADR Title: Flyway Migration Naming Convention with Padded Versions and Type Prefixes
+# ADR-0004: Flyway Migration Naming Convention with Padded Versions and Type Prefixes
 
 Date: 2025-04-10
 
 ## Status
 
-Accepted
+- Accepted
 
 ## Context
 

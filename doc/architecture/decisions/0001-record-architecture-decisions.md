@@ -1,10 +1,10 @@
-# 1. Record architecture decisions
+# ADR-0001: Record architecture decisions
 
 Date: 2025-04-06
 
 ## Status
 
-Accepted
+- Accepted
 
 ## Context
 

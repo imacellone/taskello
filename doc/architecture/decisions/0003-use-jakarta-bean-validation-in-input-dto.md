@@ -1,7 +1,7 @@
-## ADR Title: Use Jakarta Bean Validation in Input DTO
+# ADR-0003: Use Jakarta Bean Validation in Input DTO
 
 ## Status
-Accepted
+- Accepted
 
 ## Context
 We need to validate incoming data to ensure correctness before it reaches the domain layer. Jakarta Bean Validation provides a standard way to apply constraints using annotations like `@NotNull`, `@Size`, etc.

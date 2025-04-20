@@ -1,10 +1,10 @@
-# 2. Set Hibernate JDBC timezone to UTC
+# ADR-0002: Set Hibernate JDBC timezone to UTC
 
 Date: 2025-04-06
 
 ## Status
 
-Accepted
+- Accepted
 
 ## Context
 

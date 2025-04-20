@@ -1,10 +1,10 @@
-## ADR Title: Start API with `/v1` Path Prefix for Versioning
+# ADR-0005: Start API with `/v1` Path Prefix for Versioning
 
 Date: 2025-04-13
 
 ## Status
 
-Accepted
+- Accepted
 
 ## Context
 

@@ -1,8 +1,8 @@
-# ADR-006: Adopt Two-Service Structure for Domain Logic and Persistence
+# ADR-0007: Adopt Two-Service Structure for Domain Logic and Persistence
 
 ## Status
 
-Accepted
+- Superseded by [ADR-0008](0008-replace-two-service-structure-wtih-repository-implementation.md)
 
 ## Context
 

@@ -1,8 +1,8 @@
-# ADR-005: Use ModelMapper for DTO <-> Entity Mapping
+# ADR-0006: Use ModelMapper for DTO <-> Entity Mapping
 
 ## Status
 
-Accepted
+- Accepted
 
 ## Context
 
