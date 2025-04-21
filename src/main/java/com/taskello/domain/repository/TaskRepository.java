@@ -24,6 +24,12 @@ import java.util.List;
  * fully mapped representations of the underlying data and are not managed by any ORM or session.
  * Modifications to these objects will not be automatically persisted.
  * </p>
+ *
+ * <p>
+ * <strong>Note:</strong> Implementations of this interface are not required to manage transaction boundaries.
+ * It is the responsibility of the caller to ensure that write operations (such as {@code save} or {@code deleteById})
+ * are executed within an active {@link org.springframework.transaction.annotation.Transactional} context.
+ * </p>
  */
 public interface TaskRepository {
 
